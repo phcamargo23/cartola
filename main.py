@@ -18,8 +18,8 @@ def getTodosUsuarios():
     
     url = ROOT_URL+recurso
     headers = {'X-GLB-Token': TOKEN_ACESSO}    
-    playload = {'orderBy': 'campeonato', 'page': 2}
+    playload = {'orderBy': 'campeonato', 'page': 250414}
     
     return requests.get(url, headers=headers, params=playload)
 
-r = utils.obj2jsonFile(getTodosUsuarios().json()['times'], '1.json')
+r = utils.obj2jsonFile(getTodosUsuarios().json()['times'], '250414.json')
