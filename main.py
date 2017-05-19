@@ -13,13 +13,32 @@ def autenticar(credentials):
 TOKEN_ACESSO = autenticar(utils.loadJsonFromFile('credentials.json'));
 ROOT_URL = 'https://api.cartolafc.globo.com/'
                          
-def getTodosUsuarios():
+def getUsuariosLiga():
     recurso = 'auth/liga/nacional'
-    
     url = ROOT_URL+recurso
+    
     headers = {'X-GLB-Token': TOKEN_ACESSO}    
     playload = {'orderBy': 'campeonato', 'page': 250414}
     
     return requests.get(url, headers=headers, params=playload)
 
-r = utils.obj2jsonFile(getTodosUsuarios().json()['times'], '250414.json')
+# r = utils.obj2jsonFile(getUsuariosLiga().json()['times'], '250414.json')
+
+
+def getUsuario(id):
+    recurso = 'time/id/'+str(id)
+    url = ROOT_URL+recurso
+    # print url
+    
+    return requests.get(url)
+
+i = 1
+time = getUsuario(i).json()
+
+while('time' in time):
+    print time
+    i = i+1
+    getUsuario(i)
+    
+    
+
