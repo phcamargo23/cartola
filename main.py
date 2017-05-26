@@ -30,15 +30,20 @@ def getUsuario(id):
     url = ROOT_URL+recurso
     # print url
     
-    return requests.get(url)
+    return requests.get(url).json()
 
-i = 1
-time = getUsuario(i).json()
 
-while('time' in time):
-    print time
-    i = i+1
-    getUsuario(i)
+def main():
+    i = 1
+    time = getUsuario(i)
     
-    
-
+    while('time' in time):
+#        try:
+#            utils.obj2jsonFile(getUsuario(i), './data/'+str(i)+'.json')
+#        except:
+#            utils.obj2jsonFile({}, './data/'+str(i)+'.json')
+        utils.obj2jsonFile(getUsuario(i), './data/'+str(i)+'.json')
+        i = i+1
+        getUsuario(i)
+        
+main()
