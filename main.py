@@ -26,24 +26,28 @@ def getUsuariosLiga():
 
 
 def getUsuario(id):
+    #https://api.cartolafc.globo.com/time/id/
     recurso = 'time/id/'+str(id)
     url = ROOT_URL+recurso
     # print url
     
-    return requests.get(url).json()
+    return requests.get(url)
 
 
 def main():
-    i = 1
+    i = 61754
     time = getUsuario(i)
     
-    while('time' in time):
-#        try:
-#            utils.obj2jsonFile(getUsuario(i), './data/'+str(i)+'.json')
-#        except:
-#            utils.obj2jsonFile({}, './data/'+str(i)+'.json')
-        utils.obj2jsonFile(getUsuario(i), './data/'+str(i)+'.json')
-        i = i+1
-        getUsuario(i)
+    #while('time' in time):
+    while(i<5000000):
+        print 'processando n '+str(i)
+        
+        try:
+            time = getUsuario(i)
+            utils.obj2jsonFile(time.json(), './data/'+str(i)+'.json')
+        except:
+            print 'erro no '+str(i)
+            utils.obj2jsonFile({'time_id': i}, './data/'+str(i)+'.json')
+        i += 1
         
 main()
