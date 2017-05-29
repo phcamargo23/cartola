@@ -18,9 +18,19 @@ def getUsuariosLiga():
     url = ROOT_URL+recurso
     
     headers = {'X-GLB-Token': TOKEN_ACESSO}    
-    playload = {'orderBy': 'campeonato', 'page': 250414}
+    #playload = {'orderBy': 'campeonato', 'page': 250414}
     
-    return requests.get(url, headers=headers, params=playload)
+    url += '?orderBy=campeonato&page='
+    
+    for i in range(1,6): #só estrai 100
+        try:
+            time = requests.get(url+str(i), headers=headers).json()
+            
+            for j in range(0, 20):
+                print str(time['times'][j]['ranking']['campeonato']) + ' - ' + time['times'][j]['slug']
+        except Exception as e:
+#            print 'erro no % - %', i, j
+            print e.message
 
 # r = utils.obj2jsonFile(getUsuariosLiga().json()['times'], '250414.json')
 
@@ -30,11 +40,11 @@ def getUsuario(id):
     recurso = 'time/id/'+str(id)
     url = ROOT_URL+recurso
     # print url
-    
+
     return requests.get(url)
 
 
-def main():
+def getTodosUsuarios():
     i = 61754
     time = getUsuario(i)
     
@@ -49,5 +59,8 @@ def main():
             print 'erro no '+str(i)
             utils.obj2jsonFile({'time_id': i}, './data/'+str(i)+'.json')
         i += 1
-        
-main()
+
+
+
+
+getUsuariosLiga()
