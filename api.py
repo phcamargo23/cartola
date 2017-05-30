@@ -11,11 +11,17 @@ class CartolaApiExtension():
         self.api = cartolafc.Api(credentials['email'], credentials['password'], attempts=99)
         self.ultimaResposta = {}
 
-    def ehFimDosResultados(self, respostas, tamanhoDoLote):
-        if len(respostas) < 3 * tamanhoDoLote:
+    #  Se o últimos resultados forem iguais, interrompe a execução
+    def ehFimDosResultados(self, respostas, tamanhoLote):
+
+        ultimoLote = respostas[-tamanhoLote:]
+        penultimoLote = respostas[-tamanhoLote*2:-tamanhoLote]
+        antepenultimoLote = respostas[-tamanhoLote*3:-tamanhoLote*2]
+
+        if ultimoLote == []:
             return False
 
-        return respostas[-1] == respostas[-2] and respostas[-2] == respostas[-3]
+        return ultimoLote == penultimoLote == antepenultimoLote
 
     def getTimesLiga(self):
         times = []
@@ -27,5 +33,6 @@ class CartolaApiExtension():
             times.extend(self.api.liga('nacional', page=i).times)
             i += 1
 
-        return times[:-2]
+        # return times[:-2]
+        return times
 

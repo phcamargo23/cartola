@@ -1,5 +1,5 @@
 credentials
 \.spyproject
-\.ideia
 data
 *.pyc
+\.idea/
