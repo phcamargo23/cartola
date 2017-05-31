@@ -1,0 +1,29 @@
+atleta
+	id
+	nome
+	time
+	posicao
+	média
+
+partida do atleta
+	atleta id
+	número da rodada
+	scouts
+	
+partida
+	número da rodada
+	time a
+	time b
+	mandante
+	gols time a
+	gols time b
+	
+cartoleiro
+	id
+	nome
+	slug
+	facebook
+	escalacao
+		rodada id
+		formação	
+		atleta id 1..12

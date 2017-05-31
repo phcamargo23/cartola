@@ -1,0 +1,45 @@
+mais escalados
+	geral
+	na rodada
+	dos primeiros colocados
+	
+historico das partidas
+	partida
+	mandante
+	scout de cada jogador
+
+
+
+mais escalados
+	jogador
+		id
+		nome
+		posicao
+			como é em relação a mudança de posição dele?
+		média
+	cartoleiro
+		id
+		nome
+		slug
+		facebook
+		formação
+	rodada
+		número da rodada
+		
+	ranking nacional
+		id jogador
+	
+historico das partidas
+	partida
+		time a
+		time b
+		mandante
+		gols time a
+		gols time b
+		
+	scout de cada jogador
+		jogador
+		scout
+		
+		
+		

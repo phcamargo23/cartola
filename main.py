@@ -3,6 +3,7 @@ import os
 import utils
 from flask import Flask, request, render_template
 import api
+import ado
 
 app = Flask(__name__)
 
@@ -15,6 +16,12 @@ def hello_world():
 if __name__ == '__main__':
     api = api.CartolaApiExtension()
     ligaNacional = api.getTimesLiga()
-    print len(ligaNacional)
+
+    # cursor = ado.con.cursor()
+    # cursor.execute("select * from pontuacaoDosScouts")
+    # rows = cursor.fetchall()
+    # for row in rows:
+    #     print row
+
 
     # app.run()

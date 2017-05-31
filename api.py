@@ -14,25 +14,23 @@ class CartolaApiExtension():
     #  Se o últimos resultados forem iguais, interrompe a execução
     def ehFimDosResultados(self, respostas, tamanhoLote):
 
-        ultimoLote = respostas[-tamanhoLote:]
-        penultimoLote = respostas[-tamanhoLote*2:-tamanhoLote]
-        antepenultimoLote = respostas[-tamanhoLote*3:-tamanhoLote*2]
+        try:
+            ultimoLote1 = respostas[-tamanhoLote+1].__dict__
+            ultimoLote2 = respostas[-tamanhoLote*2+1].__dict__
+            ultimoLote3 = respostas[-tamanhoLote*3+1].__dict__
 
-        if ultimoLote == []:
+        except IndexError as e:
             return False
 
-        return ultimoLote == penultimoLote == antepenultimoLote
+        return ultimoLote1 == ultimoLote2 == ultimoLote3
 
     def getTimesLiga(self):
         times = []
-        # for i in range(1, 6):  # só estrai os 100 primeiros times
-        #     times.extend(self.api.liga('nacional', page=i).times)
 
         i = 1
         while(not self.ehFimDosResultados(times, 20)):
             times.extend(self.api.liga('nacional', page=i).times)
             i += 1
 
-        # return times[:-2]
-        return times
+        return times[:-2]
 
